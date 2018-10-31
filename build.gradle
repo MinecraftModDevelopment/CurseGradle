@@ -4,6 +4,9 @@ plugins {
     id 'com.gradle.plugin-publish' version '0.9.7'
 }
 
+apply plugin: 'maven-publish' 
+apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Collection/master/minecraft/maven.gradle'
+
 ext {
     inceptionYear = '2015'
     url = 'https://github.com/matthewprenger/CurseGradle'
