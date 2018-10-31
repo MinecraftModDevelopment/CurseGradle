@@ -55,6 +55,11 @@ class CurseProject {
      */
     def apiKey
 
+    /**
+     * The base of the URL for the upload
+     */
+    def apiUrl
+
     List<Object> gameVersionStrings = new ArrayList<>()
 
     @Nullable
@@ -159,6 +164,7 @@ class CurseProject {
         check(apiKey != null, "apiKey not set for project $id")
         check(mainArtifact != null, "mainArtifact not set for project $id")
         check(!gameVersionStrings.isEmpty(), "No Minecraft version configured for project $id")
+        check(apiUrl != null, "apiUrl not set at all")
         mainArtifact.validate(id)
         additionalArtifacts.each { artifact -> artifact.validate(id) }
     }

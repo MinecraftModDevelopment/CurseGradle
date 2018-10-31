@@ -20,6 +20,9 @@ class CurseUploadTask extends DefaultTask {
 
     private static final Logger log = Logging.getLogger(CurseUploadTask)
 
+	@Input
+	String apiUrl
+	
     @Input
     String apiKey
 
@@ -36,6 +39,8 @@ class CurseUploadTask extends DefaultTask {
     run() {
 
         Util.check(!Strings.isNullOrEmpty(apiKey), "CurseForge Project $projectId does not have an apiKey configured")
+		// Using the "Elvis Operator" here in hopes that it'll catch things if someone tries setting project.ext.apiUrl to nothing
+		Util.resolveApiUrl(apiUrl)
 
         mainArtifact.resolve(project)
 
@@ -61,7 +66,7 @@ class CurseUploadTask extends DefaultTask {
         }
 
         int fileID
-        final String uploadUrl = String.format(CurseGradlePlugin.UPLOAD_URL, projectId)
+        final String uploadUrl = String.format(CurseGradlePlugin.upload_url, projectId)
         log.info("Uploading file: {} to url: {} with json: {}", file, uploadUrl, json)
 
         HttpClient client = HttpClientBuilder.create()
