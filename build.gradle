@@ -12,7 +12,7 @@ ext {
     url = 'https://github.com/matthewprenger/CurseGradle'
 }
 
-version = '1.1.0'
+version = '1.1.' + getBuildNumber()
 group = 'com.matthewprenger'
 description = 'Gradle plugin to upload artifacts to CurseForge'
 archivesBaseName = 'CurseGradle'
@@ -76,4 +76,8 @@ pluginBundle {
             tags = ['curseforge', 'publish', 'minecraft']
         }
     }
+}
+
+String getBuildNumber() {
+    return System.getenv("BUILD_NUMBER") ?: System.getenv("TRAVIS_BUILD_NUMBER") ?: "0"
 }
